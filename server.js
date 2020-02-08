@@ -18,11 +18,15 @@ app.set('view engine','hbs');
 
 app.get('/',(req,res)=>{
 
-  User.find().count(function(err, count){
+  // User.find().count(function(err, count){
+  //   res.render('home.hbs',{
+  //     Number_of_entries : count
+  //   });
+  // });
+  
     res.render('home.hbs',{
       Number_of_entries : count
     });
-  });
 
 });
 
