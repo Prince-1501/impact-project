@@ -17,7 +17,13 @@ app.set('view engine','hbs');
 
 
 app.get('/',(req,res)=>{
-  res.render('home.hbs');
+
+  User.find().count(function(err, count){
+    res.render('home.hbs',{
+      Number_of_entries : count
+    });
+  });
+
 });
 
 app.post('/',(req,res)=>{
@@ -29,11 +35,16 @@ app.post('/',(req,res)=>{
     });
 
     newImpactUser.save().then((docs)=>{
-      res.render('home.hbs');
+      User.find().count(function(err, count){
+        res.render('home.hbs',{
+          Number_of_entries : count
+        });
+      });
       console.log(docs);
     },(err)=>{
       res.status(400).render('error.hbs');
     });
+
 });
 
 
